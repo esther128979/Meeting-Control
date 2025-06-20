@@ -3,7 +3,9 @@
 export interface User {
   id: number;
   name: string;
+   email: string; // הוסיפי שדה ז
    meetingIds: number[];
+   
 }
 
 export interface Meeting {

@@ -6,6 +6,7 @@ public class UserDto {
     private Long id;
     private String name;
     private Set<Long> meetingIds;
+    private String email;
 
     // 🔹 Getters
     public Long getId() {
@@ -20,6 +21,10 @@ public class UserDto {
         return meetingIds;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     // 🔹 Setters
     public void setId(Long id) {
         this.id = id;
@@ -32,6 +37,9 @@ public class UserDto {
     public void setMeetingIds(Set<Long> meetingIds) {
         this.meetingIds = meetingIds;
     }
-   
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }
