@@ -1,4 +1,3 @@
-// src/components/MeetingForm.tsx
 import React, { useState, useEffect } from 'react';
 import { createMeeting } from '../api/meetingsApi';
 import { getAllUsers } from '../api/usersApi';
@@ -34,27 +33,39 @@ const MeetingForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Create New Meeting</h2>
-      <div>
-        <label>Title:</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} required />
+      <div className="mb-3">
+        <label htmlFor="title" className="form-label">Title:</label>
+        <input
+          type="text"
+          className="form-control"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
       </div>
-      <div>
-        <label>Scheduled At:</label>
+
+      <div className="mb-3">
+        <label htmlFor="scheduledAt" className="form-label">Scheduled At:</label>
         <input
           type="datetime-local"
+          className="form-control"
+          id="scheduledAt"
           value={scheduledAt}
           onChange={(e) => setScheduledAt(e.target.value)}
           required
         />
       </div>
-      <div>
-        <label>Participants:</label>
+
+      <div className="mb-3">
+        <label htmlFor="participants" className="form-label">Participants:</label>
         <select
           multiple
+          className="form-select"
+          id="participants"
           value={participantIds.map(String)}
           onChange={(e) =>
-            setParticipantIds(Array.from(e.target.selectedOptions, (opt) => Number(opt.value)))
+            setParticipantIds(Array.from(e.target.selectedOptions, opt => Number(opt.value)))
           }
         >
           {users.map((user) => (
@@ -62,7 +73,8 @@ const MeetingForm: React.FC = () => {
           ))}
         </select>
       </div>
-      <button type="submit">Create</button>
+
+      <button type="submit" className="btn btn-primary w-100">Create</button>
     </form>
   );
 };

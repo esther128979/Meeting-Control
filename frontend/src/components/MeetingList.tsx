@@ -1,4 +1,3 @@
-// src/components/MeetingList.tsx
 import React, { useEffect, useState } from 'react';
 import { getAllMeetings } from '../api/meetingsApi';
 import { Meeting } from '../types/models';
@@ -13,20 +12,29 @@ const MeetingList: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h2>All Meetings</h2>
+    <div className="mt-5">
+      <h2 className="mb-4">All Meetings</h2>
       {meetings.length === 0 ? (
-        <p>No meetings found.</p>
+        <p className="text-muted">No meetings found.</p>
       ) : (
-        <ul>
+        <div className="row">
           {meetings.map((meeting) => (
-            <li key={meeting.id}>
-              <strong>{meeting.title}</strong> – {new Date(meeting.scheduledAt).toLocaleString()}
-              <br />
-              Participants: {meeting.participantIds.length}
-            </li>
+            <div className="col-md-6 col-lg-4 mb-4" key={meeting.id}>
+              <div className="card h-100 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title">{meeting.title}</h5>
+                  <p className="card-text">
+                    <strong>Date:</strong>{' '}
+                    {new Date(meeting.scheduledAt).toLocaleString()}
+                  </p>
+                  <p className="card-text">
+                    <strong>Participants:</strong> {meeting.participantIds.length}
+                  </p>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

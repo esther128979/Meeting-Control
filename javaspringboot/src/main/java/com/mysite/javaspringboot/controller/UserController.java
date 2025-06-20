@@ -1,5 +1,4 @@
 package com.mysite.javaspringboot.controller;
-
 import com.mysite.javaspringboot.dto.UserDto;
 import com.mysite.javaspringboot.service.UserService;
 import org.springframework.http.ResponseEntity;
