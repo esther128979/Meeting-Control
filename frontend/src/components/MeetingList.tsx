@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { getAllMeetings } from '../api/meetingsApi';
 import { Meeting } from '../types/models';
 
+
 const MeetingList: React.FC = () => {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
+
 
   useEffect(() => {
     getAllMeetings()

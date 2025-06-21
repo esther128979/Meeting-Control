@@ -1,9 +1,12 @@
-import React from 'react';
+// src/pages/MeetingsPage.tsx
+import React, { useState } from 'react';
 import MeetingList from '../components/MeetingList';
 import MeetingForm from '../components/MeetingForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MeetingsPage: React.FC = () => {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <div className="container mt-4">
       <div className="text-center mb-4">
@@ -15,7 +18,25 @@ const MeetingsPage: React.FC = () => {
           <div className="card shadow-sm mb-4">
             <div className="card-body">
               <h4 className="card-title mb-3">Create New Meeting</h4>
-              <MeetingForm />
+
+              {!showForm ? (
+                <button
+                  className="btn btn-primary w-100"
+                  onClick={() => setShowForm(true)}
+                >
+                  + New Meeting
+                </button>
+              ) : (
+                <>
+                  <MeetingForm />
+                  <button
+                    className="btn btn-link mt-2 w-100"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Cancel
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

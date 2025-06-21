@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers, createUser } from '../api/usersApi';
 import { User } from '../types/models';
+import UserList from '../components/UserList';
 
 const UsersPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -59,22 +60,7 @@ const UsersPage: React.FC = () => {
                     <button type="submit" className="btn btn-success w-100">הוסף משתמש</button>
                 </form>
             )}
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>שם</th>
-                        <th>אימייל</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <UserList users={users} />
         </div>
     );
 };

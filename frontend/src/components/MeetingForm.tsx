@@ -2,16 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { createMeeting } from '../api/meetingsApi';
 import { getAllUsers } from '../api/usersApi';
 import { Meeting, User } from '../types/models';
+// import { Toast, ToastContainer } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSearchParams } from 'react-router-dom';
+
+
 
 const MeetingForm: React.FC = () => {
     const [title, setTitle] = useState('');
     const [scheduledAt, setScheduledAt] = useState('');
     const [participantIds, setParticipantIds] = useState<number[]>([]);
     const [users, setUsers] = useState<User[]>([]);
+    const [searchParams] = useSearchParams();
+    const invitedUserId = Number(searchParams.get('invite'));
+
+
 
     useEffect(() => {
         getAllUsers().then(setUsers).catch(console.error);
     }, []);
+
+    useEffect(() => {
+        getAllUsers().then(fetchedUsers => {
+            setUsers(fetchedUsers);
+            if (invitedUserId && !isNaN(invitedUserId)) {
+                setParticipantIds([invitedUserId]);
+            }
+        }).catch(console.error);
+    }, [invitedUserId]);
+
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -75,7 +95,7 @@ const MeetingForm: React.FC = () => {
                     ))}
                 </select>
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
                 <label htmlFor="participants" className="form-label">Participants:</label>
                 <select
                     multiple
@@ -90,7 +110,7 @@ const MeetingForm: React.FC = () => {
                         <option key={user.id} value={user.id}>{user.name}</option>
                     ))}
                 </select>
-            </div>
+            </div> */}
 
             <button type="submit" className="btn btn-primary w-100">Create</button>
         </form>
